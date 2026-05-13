@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Área Quadrada</title>
+    <script>
+        function calcular() {
+            const basev = parseFloat(document.getElementById("base").value.trim());
+            const alturav = parseFloat(document.getElementById("altura").value.trim());
+            let total_area = 0;
+            
+            if (isNaN(basev) || isNaN(alturav) || basev <= 0 || alturav <= 0) {
+                document.getElementById("resultado").innerHTML = "Valores inválidos ou nulos";
+            } else {
+                total_area = basev * alturav;
+                document.getElementById("resultado").innerHTML = "Total da Área é " + total_area + "m²";
+                
+            }
+            limpar()
+        }
+
+        function teste_calcular() {
+            document.getElementById("base").value = 10;
+            document.getElementById("altura").value = 15
+
+            calcular();
+
+            const resultadov = document.getElementById("resultado").textContent
+            if (resultadov.includes("150")){
+                document.getElementById("result_test_calcular").innerHTML = "Valor calculado Correto: 150m²"+resultadov;
+
+            }else{
+                document.getElementById("result_test_calcular").innerHTML = "Cálculo Errado"
+            }
+            limpar()
+        }
+
+        function validarElementos() {
+            const elementos = ["base", "altura", "caluladora", "resultado", "teste_calcular", "result_test_calcular"];
+            let todosExistem = true;
+            
+            for (let id of elementos) {
+                if (!document.getElementById(id)) {
+                    document.getElementById("result_validar_elementos").innerHTML ="Elemento não encontrado: " + id;
+                    todosExistem = false;
+                }
+            }
+            
+            if (todosExistem) {
+                document.getElementById("result_validar_elementos").innerHTML = "Todos os elementos da interface existem e estão funcionando.";
+            } else {
+                document.getElementById("result_validar_elementos").innerHTML = "Alguns elementos da interface estão faltando.";
+            }
+            limpar()
+        }
+
+        function limpar(){
+
+            setTimeout(() => {
+                    document.getElementById("base").value = "";
+                    document.getElementById("altura").value = "";
+                    document.getElementById("resultado").innerHTML = "";
+                    document.getElementById("result_validar_elementos").innerHTML= "";
+                    document.getElementById("result_test_calcular").innerHTML = "";
+
+                }, 3500);
+            
+        }
+        
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Calculadora de Área Quadrada </h1>
+        <input type="number" id="base" placeholder="Informe o Valor de Base">
+        <input type="number" id="altura" placeholder="Informe o Valor de Altura">
+        <button id="caluladora" onclick="calcular()"><p>Calcular</p></button>
+        <div id="resultado"></div>
+
+        <button id="teste_calcular" onclick="teste_calcular()">Testar Calculo</button>
+        
+        <div id="result_test_calcular"></div>
+        <button id="teste_calcular" onclick="validarElementos()">Validar Elementos</button>
+        <div id="result_validar_elementos"></div>
+    </div>
+</body>
+</html>
